@@ -41,4 +41,10 @@ public class AlbumControllerTest {
         assertEquals("I almost do", albumController.sortOnRating(albumList).get(0).getSongTitle());
         assertEquals("I knew you were trouble", albumController.sortOnRating(albumList).get(1).getSongTitle());
     }
+
+    @Test
+    public void getAlbumList() {
+        assertEquals(1, albumController.getAlbumList().size());
+        assertEquals(3, albumController.getAlbumList().get(0).getSongs().size());
+    }
 }
