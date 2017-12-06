@@ -60,7 +60,15 @@ public class AlbumController {
         return albumList;
     }
 
-    public void setAlbumList(List<Album> albumList) { this.albumList = albumList; }
+    @RequestMapping(value = "/sortOnRating", method = RequestMethod.GET)
+    public List<Song> topSongs() {
+        return sortOnRating(getAlbumList());
+    }
+
+    @RequestMapping(value = "/showFavorites", method = RequestMethod.GET)
+    public List<Song> favorites() {
+        return showFavorites(getAlbumList());
+    }
 
     class RatingComparator implements Comparator<Song> {
         @Override
