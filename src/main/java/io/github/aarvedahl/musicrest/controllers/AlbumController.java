@@ -2,17 +2,18 @@ package io.github.aarvedahl.musicrest.controllers;
 
 import io.github.aarvedahl.musicrest.model.Album;
 import io.github.aarvedahl.musicrest.model.Song;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+@RestController
+@RequestMapping("/albums")
 public class AlbumController {
-    // primitiva datatyper som är static hamnar på native minnet
-    // En lista är en collection men collection är inte en lista
-    // Collection är superklass till set, map, list etc
-    // Business logic vs application logic
 
     List<Album> albumList;
 
@@ -40,10 +41,10 @@ public class AlbumController {
         return bestRatings;
     }
 
-    // TODO Koppla mot postgres och JPA, efter det koppla med docker och vagrant
-    // TODO Inga fler funktioner behövs just nu
+    // TODO Få igång en webservice, efter det koppla med docker och vagrant
+    // TODO Sedan koppla mot PG och JPA
 
-
+    @RequestMapping(method = RequestMethod.GET)
     public List<Album> getAlbumList() {
         if(albumList == null) {
             albumList = new ArrayList<>();
@@ -58,6 +59,7 @@ public class AlbumController {
         }
         return albumList;
     }
+
     public void setAlbumList(List<Album> albumList) { this.albumList = albumList; }
 
     class RatingComparator implements Comparator<Song> {
