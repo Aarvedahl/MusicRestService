@@ -60,6 +60,8 @@ public class AlbumController {
         return albumList;
     }
 
+
+
     @RequestMapping(value = "/sortOnRating", method = RequestMethod.GET)
     public List<Song> topSongs() {
         return sortOnRating(getAlbumList());
@@ -68,6 +70,11 @@ public class AlbumController {
     @RequestMapping(value = "/showFavorites", method = RequestMethod.GET)
     public List<Song> favorites() {
         return showFavorites(getAlbumList());
+    }
+
+    @RequestMapping(value = "/song")
+    public String song() {
+        return "This is a song";
     }
 
     class RatingComparator implements Comparator<Song> {
