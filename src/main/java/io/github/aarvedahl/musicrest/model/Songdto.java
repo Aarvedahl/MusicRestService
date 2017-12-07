@@ -1,13 +1,13 @@
 package io.github.aarvedahl.musicrest.model;
 
-public class Song {
+public class Songdto {
 
     private String songTitle;
     private boolean isFavorite;
     private double rating;
 
-    public Song() { }
-    public Song(String title, boolean isFavorite, double rating) {
+    public Songdto() { }
+    public Songdto(String title, boolean isFavorite, double rating) {
         this.songTitle = title;
         this.isFavorite = isFavorite;
         this.rating = rating;

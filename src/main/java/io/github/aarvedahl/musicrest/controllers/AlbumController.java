@@ -1,7 +1,11 @@
 package io.github.aarvedahl.musicrest.controllers;
 
-import io.github.aarvedahl.musicrest.model.Album;
-import io.github.aarvedahl.musicrest.model.Song;
+import io.github.aarvedahl.musicrest.jpa.Album;
+import io.github.aarvedahl.musicrest.model.Albumdto;
+import io.github.aarvedahl.musicrest.model.Songdto;
+import io.github.aarvedahl.musicrest.repository.AlbumRepository;
+import io.github.aarvedahl.musicrest.repository.SongRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +19,18 @@ import java.util.List;
 @RequestMapping("/albums")
 public class AlbumController {
 
-    List<Album> albumList;
 
-    public List<Song> showFavorites(List<Album> albums) {
-        List<Song> songList = new LinkedList<>();
-        for(Album album: albums) {
-            for(Song song: album.getSongs()) {
+    @Autowired AlbumRepository albumRepository;
+
+    @Autowired SongRepository songRepository;
+
+    List<Albumdto> albumList;
+    List<Album> enities;
+
+    public List<Songdto> showFavorites(List<Albumdto> albums) {
+        List<Songdto> songList = new LinkedList<>();
+        for(Albumdto album: albums) {
+            for(Songdto song: album.getSongs()) {
                 if(song.isFavorite()) {
                     songList.add(song);
                 }
@@ -29,11 +39,11 @@ public class AlbumController {
         return songList;
     }
 
-    public List<Song> sortOnRating(List<Album> albumList) {
+    public List<Songdto> sortOnRating(List<Albumdto> albumList) {
         // Visa max ev. 25 st
-        List<Song> bestRatings = new LinkedList<>();
-        for(Album album: albumList) {
-            for(Song song: album.getSongs()) {
+        List<Songdto> bestRatings = new LinkedList<>();
+        for(Albumdto album: albumList) {
+            for(Songdto song: album.getSongs()) {
                 bestRatings.add(song);
             }
         }
@@ -41,19 +51,18 @@ public class AlbumController {
         return bestRatings;
     }
 
-    // TODO Få igång en webservice, efter det koppla med docker och vagrant
     // TODO Sedan koppla mot PG och JPA
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Album> getAlbumList() {
+    public List<Albumdto> getAlbumList() {
         if(albumList == null) {
             albumList = new ArrayList<>();
-            Album album = new Album("Taylor Swift", "Red", "Pop", "url");
-            Song song = new Song("I knew you were trouble", false, 4);
+            Albumdto album = new Albumdto("Taylor Swift", "Red", "Pop", "https://upload.wikimedia.org/wikipedia/en/c/c0/Taylor_Swift_-_Red_%28Single%29.png");
+            Songdto song = new Songdto("I knew you were trouble", false, 4);
             album.addSong(song);
-            song = new Song("I almost do", false, 5);
+            song = new Songdto("I almost do", false, 5);
             album.addSong(song);
-            song = new Song("We are never ever getting back together", true, 2);
+            song = new Songdto("We are never ever getting back together", true, 2);
             album.addSong(song);
             albumList.add(album);
         }
@@ -61,28 +70,29 @@ public class AlbumController {
     }
 
 
+    @RequestMapping(value = "/entities", method = RequestMethod.GET)
+    public List<Album> albums() {
+        if(enities == null) {
+            enities = albumRepository.findAll();
+        }
+        return enities;
+    }
 
     @RequestMapping(value = "/sortOnRating", method = RequestMethod.GET)
-    public List<Song> topSongs() {
+    public List<Songdto> topSongs() {
         return sortOnRating(getAlbumList());
     }
 
     @RequestMapping(value = "/showFavorites", method = RequestMethod.GET)
-    public List<Song> favorites() {
+    public List<Songdto> favorites() {
         return showFavorites(getAlbumList());
     }
 
-    @RequestMapping(value = "/song")
-    public String song() {
-        return "This is a song";
-    }
-
-    class RatingComparator implements Comparator<Song> {
+    class RatingComparator implements Comparator<Songdto> {
         @Override
-        public int compare(Song a, Song b) {
+        public int compare(Songdto a, Songdto b) {
             return a.getRating() > b.getRating() ? -1 : a.getRating() == b.getRating() ? 0 : 1;
         }
     }
-
 
 }

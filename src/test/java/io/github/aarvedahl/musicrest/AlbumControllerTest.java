@@ -1,8 +1,8 @@
 package io.github.aarvedahl.musicrest;
 
 import io.github.aarvedahl.musicrest.controllers.AlbumController;
-import io.github.aarvedahl.musicrest.model.Album;
-import io.github.aarvedahl.musicrest.model.Song;
+import io.github.aarvedahl.musicrest.model.Albumdto;
+import io.github.aarvedahl.musicrest.model.Songdto;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -12,18 +12,18 @@ import java.util.List;
 
 public class AlbumControllerTest {
     AlbumController albumController;
-    List<Album> albumList;
+    List<Albumdto> albumList;
 
     @Before
     public void init() {
         albumController = new AlbumController();
         albumList = new ArrayList<>();
-        Album album = new Album("Taylor Swift", "Red", "Pop", "url");
-        Song song = new Song("I knew you were trouble", false, 4);
+        Albumdto album = new Albumdto("Taylor Swift", "Red", "Pop", "url");
+        Songdto song = new Songdto("I knew you were trouble", false, 4);
         album.addSong(song);
-        song = new Song("I almost do", false, 5);
+        song = new Songdto("I almost do", false, 5);
         album.addSong(song);
-        song = new Song("We are never ever getting back together", true, 2);
+        song = new Songdto("We are never ever getting back together", true, 2);
         album.addSong(song);
         albumList.add(album);
 
@@ -31,7 +31,7 @@ public class AlbumControllerTest {
 
     @Test
     public void showFavorite() {
-        for(Song song1: albumController.showFavorites(albumList)) {
+        for(Songdto song1: albumController.showFavorites(albumList)) {
             assertEquals(true, song1.isFavorite());
         }
     }
