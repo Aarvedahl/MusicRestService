@@ -1,6 +1,7 @@
 package io.github.aarvedahl.musicrest.controllers;
 
 import io.github.aarvedahl.musicrest.jpa.Album;
+import io.github.aarvedahl.musicrest.jpa.Song;
 import io.github.aarvedahl.musicrest.model.Albumdto;
 import io.github.aarvedahl.musicrest.model.Songdto;
 import io.github.aarvedahl.musicrest.repository.AlbumRepository;
@@ -24,8 +25,10 @@ public class AlbumController {
 
     @Autowired SongRepository songRepository;
 
-    List<Albumdto> albumList;
-    List<Album> enities;
+
+    List<Albumdto> albumdtos;
+    List<Albumdto> mockList;
+    List<Album> albums;
 
     public List<Songdto> showFavorites(List<Albumdto> albums) {
         List<Songdto> songList = new LinkedList<>();
@@ -51,12 +54,10 @@ public class AlbumController {
         return bestRatings;
     }
 
-    // TODO Sedan koppla mot PG och JPA
-
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Albumdto> getAlbumList() {
-        if(albumList == null) {
-            albumList = new ArrayList<>();
+    @RequestMapping(value = "/mocklist", method = RequestMethod.GET)
+    public List<Albumdto> getMockList() {
+        if(mockList == null) {
+            mockList = new ArrayList<>();
             Albumdto album = new Albumdto("Taylor Swift", "Red", "Pop", "https://upload.wikimedia.org/wikipedia/en/c/c0/Taylor_Swift_-_Red_%28Single%29.png");
             Songdto song = new Songdto("I knew you were trouble", false, 4);
             album.addSong(song);
@@ -64,29 +65,50 @@ public class AlbumController {
             album.addSong(song);
             song = new Songdto("We are never ever getting back together", true, 2);
             album.addSong(song);
-            albumList.add(album);
+            mockList.add(album);
         }
-        return albumList;
+        return mockList;
     }
 
-
-    @RequestMapping(value = "/entities", method = RequestMethod.GET)
-    public List<Album> albums() {
-        if(enities == null) {
-            enities = albumRepository.findAll();
-        }
-        return enities;
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Albumdto> albums() {
+        return getAlbumdtos();
     }
 
     @RequestMapping(value = "/sortOnRating", method = RequestMethod.GET)
     public List<Songdto> topSongs() {
-        return sortOnRating(getAlbumList());
+        return sortOnRating(getAlbumdtos());
     }
 
     @RequestMapping(value = "/showFavorites", method = RequestMethod.GET)
     public List<Songdto> favorites() {
-        return showFavorites(getAlbumList());
+        return showFavorites(getAlbumdtos());
     }
+
+
+    public List<Album> getAlbums() {
+        if(albums == null) {
+            albums = albumRepository.findAll();
+        }
+        return albums;
+    }
+
+
+    public List<Albumdto> getAlbumdtos() {
+        if(albumdtos == null) {
+            albumdtos = new LinkedList<>();
+            for(Album album: getAlbums()) {
+                Albumdto albumdto = new Albumdto(album.getArtist(), album.getAlbumlogo(), album.getGenre(), album.getAlbumtitle());
+                for(Song song: album.getSongs()) {
+                    Songdto songdto = new Songdto(song.getSongtitle(), song.isFavorite(), song.getRating());
+                    albumdto.addSong(songdto);
+                }
+                albumdtos.add(albumdto);
+            }
+        }
+        return albumdtos;
+    }
+
 
     class RatingComparator implements Comparator<Songdto> {
         @Override

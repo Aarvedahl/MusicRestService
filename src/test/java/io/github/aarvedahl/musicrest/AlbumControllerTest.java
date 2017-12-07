@@ -44,9 +44,9 @@ public class AlbumControllerTest {
 
     @Test
     public void getAlbumList() {
-        assertEquals(1, albumController.getAlbumList().size());
-        assertEquals(3, albumController.getAlbumList().get(0).getSongs().size());
-        assertEquals(1, albumController.getAlbumList().size());
-        assertEquals(3, albumController.getAlbumList().get(0).getSongs().size());
+        assertEquals(1, albumController.getMockList().size());
+        assertEquals(3, albumController.getMockList().get(0).getSongs().size());
+        assertEquals(1, albumController.getMockList().size());
+        assertEquals(3, albumController.getMockList().get(0).getSongs().size());
     }
 }
