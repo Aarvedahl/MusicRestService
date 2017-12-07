@@ -7,6 +7,7 @@ import io.github.aarvedahl.musicrest.model.Songdto;
 import io.github.aarvedahl.musicrest.repository.AlbumRepository;
 import io.github.aarvedahl.musicrest.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,11 +21,9 @@ import java.util.List;
 @RequestMapping("/albums")
 public class AlbumController {
 
-
     @Autowired AlbumRepository albumRepository;
 
     @Autowired SongRepository songRepository;
-
 
     List<Albumdto> albumdtos;
     List<Albumdto> mockList;
@@ -70,6 +69,7 @@ public class AlbumController {
         return mockList;
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     public List<Albumdto> albums() {
         return getAlbumdtos();
@@ -85,6 +85,10 @@ public class AlbumController {
         return showFavorites(getAlbumdtos());
     }
 
+    @RequestMapping(value = "/getone", method = RequestMethod.GET)
+    public Albumdto getOne() {
+        return getMockList().get(0);
+    }
 
     public List<Album> getAlbums() {
         if(albums == null) {
@@ -94,11 +98,13 @@ public class AlbumController {
     }
 
 
+
+
     public List<Albumdto> getAlbumdtos() {
         if(albumdtos == null) {
             albumdtos = new LinkedList<>();
             for(Album album: getAlbums()) {
-                Albumdto albumdto = new Albumdto(album.getArtist(), album.getAlbumlogo(), album.getGenre(), album.getAlbumtitle());
+                Albumdto albumdto = new Albumdto(album.getArtist(), album.getAlbumtitle(), album.getGenre(), album.getAlbumlogo());
                 for(Song song: album.getSongs()) {
                     Songdto songdto = new Songdto(song.getSongtitle(), song.isFavorite(), song.getRating());
                     albumdto.addSong(songdto);
@@ -108,7 +114,6 @@ public class AlbumController {
         }
         return albumdtos;
     }
-
 
     class RatingComparator implements Comparator<Songdto> {
         @Override
