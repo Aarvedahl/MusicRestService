@@ -7,15 +7,16 @@ public class Albumdto {
 
     private String artist;
     private String albumTitle;
-    private String genre;
+   // private String genre;
+    private int albumid;
     private String albumLogo;
     public List<Songdto> songs = new ArrayList<>();
 
     public Albumdto() { }
-    public Albumdto(String artist, String albumTitle, String genre, String albumLogo) {
+    public Albumdto(String artist, String albumTitle, int albumid, String albumLogo) {
         this.artist = artist;
         this.albumTitle = albumTitle;
-        this.genre = genre;
+        this.albumid = albumid;
         this.albumLogo = albumLogo;
     }
 
@@ -25,9 +26,11 @@ public class Albumdto {
     public String getAlbumLogo() { return albumLogo; }
     public String getAlbumTitle() { return albumTitle;  }
     public String getArtist() { return artist; }
-    public String getGenre() { return genre; }
+   // public String getGenre() { return genre; }
     public void setAlbumTitle(String albumTitle) { this.albumTitle = albumTitle; }
     public void setArtist(String artist) { this.artist = artist; }
     public void setAlbumLogo(String albumLogo) { this.albumLogo = albumLogo; }
-    public void setGenre(String genre) { this.genre = genre; }
+    public int getAlbumid() { return albumid; }
+    public void setAlbumid(int albumid) { this.albumid = albumid; }
+    // public void setGenre(String genre) { this.genre = genre; }
 }

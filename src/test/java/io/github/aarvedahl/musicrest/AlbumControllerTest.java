@@ -18,7 +18,7 @@ public class AlbumControllerTest {
     public void init() {
         albumController = new AlbumController();
         albumList = new ArrayList<>();
-        Albumdto album = new Albumdto("Taylor Swift", "Red", "Pop", "url");
+        Albumdto album = new Albumdto("Taylor Swift", "Red", 1, "url");
         Songdto song = new Songdto("I knew you were trouble", false, 4);
         album.addSong(song);
         song = new Songdto("I almost do", false, 5);

@@ -5,12 +5,8 @@ import io.github.aarvedahl.musicrest.jpa.Song;
 import io.github.aarvedahl.musicrest.model.Albumdto;
 import io.github.aarvedahl.musicrest.model.Songdto;
 import io.github.aarvedahl.musicrest.repository.AlbumRepository;
-import io.github.aarvedahl.musicrest.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,8 +18,6 @@ import java.util.List;
 public class AlbumController {
 
     @Autowired AlbumRepository albumRepository;
-
-    @Autowired SongRepository songRepository;
 
     List<Albumdto> albumdtos;
     List<Albumdto> mockList;
@@ -57,7 +51,7 @@ public class AlbumController {
     public List<Albumdto> getMockList() {
         if(mockList == null) {
             mockList = new ArrayList<>();
-            Albumdto album = new Albumdto("Taylor Swift", "Red", "Pop", "https://upload.wikimedia.org/wikipedia/en/c/c0/Taylor_Swift_-_Red_%28Single%29.png");
+            Albumdto album = new Albumdto("Taylor Swift", "Red", 1, "https://upload.wikimedia.org/wikipedia/en/c/c0/Taylor_Swift_-_Red_%28Single%29.png");
             Songdto song = new Songdto("I knew you were trouble", false, 4);
             album.addSong(song);
             song = new Songdto("I almost do", false, 5);
@@ -67,6 +61,18 @@ public class AlbumController {
             mockList.add(album);
         }
         return mockList;
+    }
+
+
+    @RequestMapping(value = "/getAlbum/{albumid}", method = RequestMethod.GET)
+    public Albumdto getOneAlbum(@PathVariable("albumid") int albumid) {
+        Album album = albumRepository.findByAlbumid(albumid);
+        Albumdto albumdto = new Albumdto(album.getArtist(), album.getAlbumtitle(), album.getAlbumid(), album.getAlbumlogo());
+        for(Song song: album.getSongs()) {
+            Songdto songdto = new Songdto(song.getSongtitle(), song.isFavorite(), song.getRating());
+            albumdto.addSong(songdto);
+        }
+        return albumdto;
     }
 
     @CrossOrigin
@@ -85,10 +91,6 @@ public class AlbumController {
         return showFavorites(getAlbumdtos());
     }
 
-    @RequestMapping(value = "/getone", method = RequestMethod.GET)
-    public Albumdto getOne() {
-        return getMockList().get(0);
-    }
 
     public List<Album> getAlbums() {
         if(albums == null) {
@@ -98,13 +100,11 @@ public class AlbumController {
     }
 
 
-
-
     public List<Albumdto> getAlbumdtos() {
         if(albumdtos == null) {
             albumdtos = new LinkedList<>();
             for(Album album: getAlbums()) {
-                Albumdto albumdto = new Albumdto(album.getArtist(), album.getAlbumtitle(), album.getGenre(), album.getAlbumlogo());
+                Albumdto albumdto = new Albumdto(album.getArtist(), album.getAlbumtitle(), album.getAlbumid(), album.getAlbumlogo());
                 for(Song song: album.getSongs()) {
                     Songdto songdto = new Songdto(song.getSongtitle(), song.isFavorite(), song.getRating());
                     albumdto.addSong(songdto);

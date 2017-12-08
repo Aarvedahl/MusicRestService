@@ -12,17 +12,21 @@
 	<body>
 		<div class="container" ng-controller="Hello">
 			<div class="row">
-		    <div class="col-4" ng-repeat="album in albums">
+		    <div class="col-4" ng-click="foo($event, album)" ng-repeat="album in albums">
 					<img class="albumlogo" ng-src="{{album.albumLogo}}" alt="Album Logo" />
 					<h3>{{album.albumTitle}}</h3>
 					<h4>{{album.artist}}</h4>
-					<ul>
+					<button type="button" class="btn btn-primary">View Details</button>
+					<span ng-if="checked" class="animate-if">
+					  This is removed when the checkbox is unchecked.
+					</span>
+					<!--<ul>
 						<li ng-repeat="song in album.songs">
 							<strong> {{ song.songTitle }} </strong><br/>
-							<strong> {{ song.rating }} </strong><br/>
-							<strong> {{ song.favorite }} </strong>
+							<strong> Rating: {{ song.rating }} </strong><br/>
+							<strong> Favorite: {{ song.favorite }} </strong>
 						</li>
-					<ul>
+					<ul> --->
 		    </div>
 			</div>
 		</div>
