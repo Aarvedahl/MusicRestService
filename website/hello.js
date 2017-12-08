@@ -9,11 +9,6 @@ angular.module('demo', [])
 
       $scope.foo = function($event, album) {
         console.log($event);
-        if($event.currentTarget.albumTitle == "Red") {
-          console.log("RED HERE I AM");
-        }
-        $scope.checked = !$scope.checked;
       }
 
-      $scope.checked = false;
 });
