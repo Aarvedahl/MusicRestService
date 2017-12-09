@@ -76,6 +76,12 @@ public class AlbumController {
     }
 
     @CrossOrigin
+    @GetMapping(value = "/getOneAlbum")
+    public Albumdto getAlbum() {
+        return getMockList().get(0);
+    }
+
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     public List<Albumdto> albums() {
         return getAlbumdtos();
