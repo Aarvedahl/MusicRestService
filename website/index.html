@@ -16,14 +16,20 @@
 					<img class="albumlogo" ng-src="{{album.albumLogo}}" alt="Album Logo" />
 					<h3>{{album.albumTitle}}</h3>
 					<h4>{{album.artist}}</h4>
-					<button type="button" class="btn btn-primary">View Details</button>
-					<!--<ul>
+					<label>View Details <input type="checkbox" ng-model="checked" ng-init="checked=false" /></label>
+					<!-- Kanske bättre att lägga till ng model till en property i album -->
+					<ul ng-if="checked">
 						<li ng-repeat="song in album.songs">
-							<strong> {{ song.songTitle }} </strong><br/>
+							<div ng-show="{{ song.favorite }}">
+								<img src="http://i.imgur.com/b9b13Rd.png" />
+								<strong> {{ song.songTitle }} </strong>
+							</div>
+							<div ng-show="{{ !song.favorite }}">
+								<strong> {{ song.songTitle }} </strong>
+							</div>
 							<strong> Rating: {{ song.rating }} </strong><br/>
-							<strong> Favorite: {{ song.favorite }} </strong>
 						</li>
-					<ul> --->
+					<ul>
 		    </div>
 			</div>
 		</div>
