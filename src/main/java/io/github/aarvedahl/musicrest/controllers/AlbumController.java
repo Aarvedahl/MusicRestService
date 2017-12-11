@@ -87,11 +87,13 @@ public class AlbumController {
         return getAlbumdtos();
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/sortOnRating", method = RequestMethod.GET)
     public List<Songdto> topSongs() {
         return sortOnRating(getAlbumdtos());
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/showFavorites", method = RequestMethod.GET)
     public List<Songdto> favorites() {
         return showFavorites(getAlbumdtos());
@@ -106,6 +108,7 @@ public class AlbumController {
     }
 
 
+    // TODO Lägg till album logo till varje bild
     public List<Albumdto> getAlbumdtos() {
         if(albumdtos == null) {
             albumdtos = new LinkedList<>();
