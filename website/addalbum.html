@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="favorite">
+<html ng-app="addalbum">
 
 <head>
   <title>Hello AngularJS</title>
@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
   <script src="https://use.fontawesome.com/d97e4c5e8f.js"></script>
-  <script src="favorites.js"></script>
+  <script src="addalbum.js"></script>
   <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
 
@@ -22,25 +22,29 @@
         <li class="nav-item">
           <a class="nav-link" href="./index.html">Home</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="./favorites.html">Favorites <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="./favorites.html">Favorites</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./toplist.html">Top 25</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="./addalbum.html"> <i class="fa fa-plus" aria-hidden="true"></i> Add Album</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="./addalbum.html"> <i class="fa fa-plus" aria-hidden="true"></i> Add Album <span class="sr-only">(current)</span></a>
         </li>
       </ul>
     </div>
   </nav>
-  <div class="container showAlbums" ng-controller="Favorites">
+  <div class="container showAlbums" ng-controller="Addalbum">
     <div class="row">
-      <div class="col-md-6 offset-md-3 song" ng-repeat="song in songs">
-        <h2>All Favorites</h2>
-        <h3> {{ song.songTitle }} </h3>
-        <h4> Rating: {{ song.rating }} </h4>
-      </div>
+      <form novalidate class="simple-form">
+        <label>Artist: <input type="text" ng-model="album.artist" /></label><br />
+        <label>Album Title: <input type="text" ng-model="album.albumtitle" /></label><br />
+        <label>Genre: <input type="text" ng-model="album.genre" /></label><br />
+        <label>Album Logo: <input type="text" ng-model="album.albumlogo" /></label><br />
+        <input type="submit" class="btn btn-primary" ng-click="create(album)" value="Save" />
+        <input type="button" class="btn btn-danger" type="reset" value="Reset" />
+      </form>
+      <!--  <pre>album = {{album | json}}</pre> -->
     </div>
   </div>
 </body>

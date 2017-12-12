@@ -99,6 +99,12 @@ public class AlbumController {
         return showFavorites(getAlbumdtos());
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/addAlbum", method = RequestMethod.POST)
+    public String addAlbum(@RequestBody Album album) {
+        return album.getAlbumtitle();
+    }
+
 
     public List<Album> getAlbums() {
         if(albums == null) {
@@ -108,7 +114,7 @@ public class AlbumController {
     }
 
 
-    // TODO Lägg till album logo till varje bild
+    // TODO Lägg till album logo till varje sång
     public List<Albumdto> getAlbumdtos() {
         if(albumdtos == null) {
             albumdtos = new LinkedList<>();
