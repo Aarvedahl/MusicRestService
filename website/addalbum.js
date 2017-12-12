@@ -2,7 +2,7 @@ angular.module('addalbum', [])
   .controller('Addalbum', function($scope, $http) {
 
     $scope.create = function(album) {
-      //  album.songs = [];
+      album.songs = [];
       console.log(album);
       $http({
           url: 'http://localhost:8080/albums/addAlbum',
@@ -17,6 +17,7 @@ angular.module('addalbum', [])
           },
           function(response) { // optional
             // failed
+            console.error(response);
           });
     };
 

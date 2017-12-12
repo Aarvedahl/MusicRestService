@@ -36,16 +36,18 @@
   </nav>
   <div class="container showAlbums" ng-controller="TopList">
     <div class="row">
-      <div class="col-md-6 offset-md-3 song" ng-repeat="song in songs">
+      <div class="col-md-6 offset-md-3 song">
         <h2>Top 25 Songs</h2>
-        <div ng-show="{{ song.favorite }}">
-          <img id="starIcon" src="http://i.imgur.com/b9b13Rd.png" />
-          <h3 id="songTitle"> {{ song.songTitle }} </h3>
+        <div ng-repeat="song in songs">
+          <div ng-show="{{ song.favorite }}">
+            <img id="starIcon" src="http://i.imgur.com/b9b13Rd.png" />
+            <h3 id="songTitle"> {{ song.songTitle }} </h3>
+          </div>
+          <div ng-show="{{ !song.favorite }}">
+            <h3> {{ song.songTitle }} </h3>
+          </div>
+          <h4> Rating: {{ song.rating }} </h4><br/>
         </div>
-        <div ng-show="{{ !song.favorite }}">
-          <h3> {{ song.songTitle }} </h3>
-        </div>
-        <h4> Rating: {{ song.rating }} </h4>
       </div>
     </div>
   </div>

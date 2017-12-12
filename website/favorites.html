@@ -36,10 +36,12 @@
   </nav>
   <div class="container showAlbums" ng-controller="Favorites">
     <div class="row">
-      <div class="col-md-6 offset-md-3 song" ng-repeat="song in songs">
+      <div class="col-md-6 offset-md-3 song">
         <h2>All Favorites</h2>
-        <h3> {{ song.songTitle }} </h3>
-        <h4> Rating: {{ song.rating }} </h4>
+        <div ng-repeat="song in songs">
+          <h3> {{ song.songTitle }} </h3>
+          <h4> Rating: {{ song.rating }} </h4><br/>
+        </div>
       </div>
     </div>
   </div>
