@@ -101,8 +101,8 @@ public class AlbumController {
 
     @CrossOrigin
     @RequestMapping(value = "/addAlbum", method = RequestMethod.POST)
-    public String addAlbum(@RequestBody Album album) {
-        return album.getAlbumtitle();
+    public void addAlbum(@RequestBody Albumdto album) {
+        
     }
 
 
