@@ -45,12 +45,12 @@
       <form novalidate class="simple-form">
         <label>Song Title: <input type="text" ng-model="song.songtitle" /></label><br />
         <label>Choose a album:
-          <select name="repeatSelect" id="repeatSelect" ng-model="song.album">
+          <select name="repeatSelect" id="repeatSelect" ng-model="song.albumid">
             <option ng-repeat="album in albums" value="{{album.albumid}}">{{album.albumTitle}}</option>
           </select>
         </label><br />
         <label>Favorite: <input type="checkbox" name="favorite" ng-model="song.favorite"></label><br />
-        <label>Genre: <input type="text" ng-model="album.genre" /></label><br />
+        <label>Genre: <input type="text" ng-model="song.genre" /></label><br />
         <input type="submit" class="btn btn-primary" ng-click="create(song)" value="Save" />
         <input type="button" class="btn btn-danger" type="reset" value="Reset" />
       </form>

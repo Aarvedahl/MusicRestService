@@ -1,4 +1,4 @@
-package io.github.aarvedahl.musicrest.model;
+package io.github.aarvedahl.musicrest.dto;
 
 public class Songdto {
 

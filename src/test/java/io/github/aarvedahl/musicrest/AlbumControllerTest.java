@@ -1,8 +1,8 @@
 package io.github.aarvedahl.musicrest;
 
 import io.github.aarvedahl.musicrest.controllers.AlbumController;
-import io.github.aarvedahl.musicrest.model.Albumdto;
-import io.github.aarvedahl.musicrest.model.Songdto;
+import io.github.aarvedahl.musicrest.dto.Albumdto;
+import io.github.aarvedahl.musicrest.dto.Songdto;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -9,21 +9,21 @@ angular.module('addsong', [])
 
     $scope.create = function(song) {
       console.log(song);
-      /*    $http({
-              url: 'URL',
-              method: "POST",
-              data: album,
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-            .then(function(response) {
-                // success
-              },
-              function(response) { // optional
-                // failed
-                console.error(response);
-              }); */
+      $http({
+          url: 'http://localhost:8080/songs/addSong',
+          method: "POST",
+          data: song,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(function(response) {
+            // success
+          },
+          function(response) {
+            // failed
+            console.error(response);
+          });
     };
 
   });

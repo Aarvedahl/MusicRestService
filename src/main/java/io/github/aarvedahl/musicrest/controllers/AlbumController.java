@@ -2,8 +2,8 @@ package io.github.aarvedahl.musicrest.controllers;
 
 import io.github.aarvedahl.musicrest.jpa.Album;
 import io.github.aarvedahl.musicrest.jpa.Song;
-import io.github.aarvedahl.musicrest.model.Albumdto;
-import io.github.aarvedahl.musicrest.model.Songdto;
+import io.github.aarvedahl.musicrest.dto.Albumdto;
+import io.github.aarvedahl.musicrest.dto.Songdto;
 import io.github.aarvedahl.musicrest.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
