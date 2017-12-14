@@ -46,6 +46,7 @@
         <label>Song Title: <input type="text" ng-model="song.songtitle" /></label><br />
         <label>Choose a album:
           <select name="repeatSelect" id="repeatSelect" ng-model="song.albumid">
+            <!-- Eventuellt måste vi skicka med hela album objektet -->
             <option ng-repeat="album in albums" value="{{album.albumid}}">{{album.albumTitle}}</option>
           </select>
         </label><br />

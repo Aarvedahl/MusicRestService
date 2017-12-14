@@ -30,6 +30,10 @@ public class Album implements Serializable {
     @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
+    public Album() { }
+    public Album(int albumid) {
+        this.albumid = albumid;
+    }
 
     public int getAlbumid() { return albumid; }
     public void setAlbumid(int albumid) { this.albumid = albumid; }

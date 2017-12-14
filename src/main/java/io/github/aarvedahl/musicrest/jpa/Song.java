@@ -25,6 +25,12 @@ public class Song {
 
 
     public Song() { }
+    public Song(String songtitle, boolean favorite, double rating, Album album) {
+        this.songtitle = songtitle;
+        this.favorite = favorite;
+        this.rating = rating;
+        this.album = album;
+    }
     public int getSongid() { return songid; }
     public void setSongid(int songid) { this.songid = songid;    }
     public String getSongtitle() { return songtitle;    }
