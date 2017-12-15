@@ -20,10 +20,10 @@
 						<li ng-repeat="song in album.songs">
               <div ng-show="{{ song.favorite }}">
                 <img src="http://i.imgur.com/b9b13Rd.png" />
-							  <strong> {{ song.songTitle }} </strong>
+							  <strong> {{ song.songtitle }} </strong>
               </div>
               <div ng-show="{{ !song.favorite }}">
-							  <strong> {{ song.songTitle }} </strong>
+							  <strong> {{ song.songtitle }} </strong>
               </div>
 							<strong> Rating: {{ song.rating }} </strong><br/>
 						</li>
