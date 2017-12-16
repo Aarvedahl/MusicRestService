@@ -40,7 +40,14 @@
       </ul>
     </div>
   </nav>
+
   <div class="container showAlbums" ng-controller="Addsong">
+    <div ng-if="failed" class="alert alert-danger" role="alert">
+      We are unable to add your song, please try again!
+    </div>
+    <div ng-if="success" class="alert alert-success" role="alert">
+      Song was successfully added!
+    </div>
     <div class="row">
       <form novalidate class="simple-form">
         <label>Song Title: <input type="text" ng-model="song.songtitle" /></label><br />

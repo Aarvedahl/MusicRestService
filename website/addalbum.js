@@ -14,9 +14,13 @@ angular.module('addalbum', [])
         })
         .then(function(response) {
             // success
+            $scope.failed = false;
+            $scope.success = true;
           },
-          function(response) { // optional
+          function(response) {
             // failed
+            $scope.success = false;
+            $scope.failed = true;
             console.error(response);
           });
     };

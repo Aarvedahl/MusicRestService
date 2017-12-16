@@ -41,6 +41,12 @@
     </div>
   </nav>
   <div class="container showAlbums" ng-controller="Addalbum">
+    <div ng-if="failed" class="alert alert-danger" role="alert">
+      We are unable to add your album, please try again!
+    </div>
+    <div ng-if="success" class="alert alert-success" role="alert">
+      Album was successfully added!
+    </div>
     <div class="row">
       <form novalidate class="simple-form">
         <label>Artist: <input type="text" ng-model="album.artist" /></label><br />

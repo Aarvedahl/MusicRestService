@@ -19,10 +19,13 @@ angular.module('addsong', [])
         })
         .then(function(response) {
             // success
+            $scope.failed = false;
+            $scope.success = true;
           },
           function(response) {
             // failed
-            console.error(response);
+            $scope.success = false;
+            $scope.failed = true;
           });
     };
 
