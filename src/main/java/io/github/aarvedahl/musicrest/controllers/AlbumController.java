@@ -36,7 +36,6 @@ public class AlbumController {
     }
 
     public List<Songdto> sortOnRating(List<Albumdto> albumList) {
-        // Visa max ev. 25 st
         List<Songdto> bestRatings = new LinkedList<>();
         for(Albumdto album: albumList) {
             for(Songdto song: album.getSongs()) {

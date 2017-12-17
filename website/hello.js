@@ -5,9 +5,4 @@ angular.module('demo', [])
       $scope.albums = response.data;
     });
 
-
-    $scope.foo = function($event, album) {
-      console.log($event);
-    }
-
   });
